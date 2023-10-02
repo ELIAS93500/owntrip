@@ -35,8 +35,10 @@ class StripePayController extends AbstractController
         }
        Stripe::setApiKey('sk_test_51Nwi91ACvwDaBQU7oFqwm84J7wD9HwZqup7X8t9P81Wi8CeINMWBSW1ZMppoHVv0f0lkIpOMMUeM4rlnEZx4TxkD00RWSTc9P2');
         $session=Session::create([
-            'success_url'=>'http://127.0.0.1:8000/commande/success',
-            'cancel_url'=>'http://127.0.0.1:8000/wishList',
+            'success_url'=>'http://elias.lock.cezdigit.com/commande/success',
+            //'success_url'=>'http://127.0.0.1:8000/commande/success',
+            'cancel_url'=>'https://elias.lock.cezdigit.com/wishList',
+            //'cancel_url'=>'http://127.0.0.1:8000/wishList',
             'payment_method_types'=>['card'],
             'line_items'=>$line_items,
             'mode'=>'payment'
