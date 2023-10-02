@@ -29,6 +29,9 @@ class Activity
     private ?int $max_price = null;
 
 
+    #[ORM\Column]
+    private ?int $price = null;
+
     #[ORM\Column(length: 255)]
     private ?string $tel = null;
 
@@ -117,6 +120,26 @@ class Activity
 
         return $this;
     }
+
+    /**
+     * @return int|null
+     */
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param int|null $price
+     */
+    public function setPrice(?int $price): void
+    {
+        $this->price = $price;
+    }
+
+
+
+
 
     public function getTel(): ?string
     {

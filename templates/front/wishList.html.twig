@@ -25,8 +25,41 @@
         {% endfor %}
         </tbody>
     </table>
-
+    
+    <a href="{{ path('app_stripe_pay')}}" class="btn btn-success">Valider ma commande</a>
 {% endblock %}
+
+{% block javascripts %}
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript">
+        var stripe = Stripe("pk_test_51Nwi91ACvwDaBQU7etnrYEEC9h2McQwmq3WNKuTI7nQ4fJVHUJOvXHqfF7VZzJkbqh3DH05TjI2pYvNXMXgqWsxI00leE38qzg");
+        var checkoutButton = document.getElementById("checkout-button");
+
+        checkoutButton.addEventListener('click', function () {
+            fetch('/stripe/pay', {
+                method : 'POST',
+            })
+                .then(function(response) {
+                    return response.json()
+                })
+                .then(function(session) {
+                    return stripe.redirectToCheckout({ sessionId : session.id});
+                })
+                .then(function(result) {
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Error', error);
+                });
+        });
+    </script>
+    
+{% endblock %}
+
+
 
 {% block title %}
 
